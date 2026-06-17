@@ -1,0 +1,19 @@
+# Selenium BDD Testing Framework Dependencies
+# Project: Behave + Pytest BDD Testing with Selenium
+# Platform: macOS (Mac Air)
+
+# Web Testing & Automation
+selenium>=4.0.0
+webdriver-manager>=3.8.0
+
+# Testing Frameworks
+pytest>=7.0.0
+behave>=1.2.6
+
+# Reporting
+allure-pytest>=2.13.0
+allure-behave>=2.13.0
+
+# Additional utilities
+python-dotenv>=1.0.0
+
