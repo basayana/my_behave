@@ -1,11 +1,15 @@
-# Behave environment hooks for screenshot on failure
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.remote.webdriver import WebDriver
 import os
 import allure
 
-def before_all(context):
+def before_scenario(context, scenario):
     # Ensure the screenshots directory exists
     os.makedirs("screenshots", exist_ok=True)
+    context.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    context.driver.get("https://testautomationpractice.blogspot.com/")
 
 def after_scenario(context, scenario):
     driver = getattr(context, "driver", None)
