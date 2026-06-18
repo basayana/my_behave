@@ -9,4 +9,3 @@ def get_shadow_dom_object(context):
     textbox = shadow_root.find_element(By.CSS_SELECTOR, "input[type='text']")
     textbox.send_keys("Hello Shadow DOM!")
     print("*******Entered text in shadow DOM textbox: Hello Shadow DOM!", flush=True)
-    assert 1==2
