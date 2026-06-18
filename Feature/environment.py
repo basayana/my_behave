@@ -5,11 +5,16 @@ from selenium.webdriver.remote.webdriver import WebDriver
 import os
 import allure
 
-def before_scenario(context, scenario):
+def before_feature(context, feature):
     # Ensure the screenshots directory exists
     os.makedirs("screenshots", exist_ok=True)
     context.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     context.driver.get("https://testautomationpractice.blogspot.com/")
+
+def after_feature(context, feature):
+    driver = getattr(context, "driver", None)
+    if isinstance(driver, WebDriver):
+        driver.quit()
 
 def after_scenario(context, scenario):
     driver = getattr(context, "driver", None)
@@ -24,7 +29,6 @@ def after_scenario(context, scenario):
                 # Attach screenshot to Allure report
                 with open(filename, "rb") as image_file:
                     allure.attach(image_file.read(), name="screenshot", attachment_type=allure.attachment_type.PNG)
-                driver.quit()
             except Exception as e:
                 print(f"[AFTER_SCENARIO][ERROR] Failed to save screenshot: {e}", flush=True)
         else:
