@@ -56,3 +56,7 @@ def after_scenario(context, scenario):
                 print(f"[AFTER_SCENARIO][ERROR] Failed to save screenshot: {e}", flush=True)
         else:
             print("[AFTER_SCENARIO][ERROR] context.driver is not a valid WebDriver instance.", flush=True)
+
+def before_scenario(context, scenario):
+    # ← This labels each scenario with browser name in Allure
+    allure.dynamic.label("browser", BROWSER)

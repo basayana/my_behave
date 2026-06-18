@@ -1,13 +1,4 @@
-Run below command to see the print statements also
-behave ./Features --no-capture --format=plain
-************
-
-# Terminal 1
 BROWSER=chromium behave Features/ -f allure_behave.formatter:AllureFormatter -o allure-results/chromium
-
-# Terminal 2
 BROWSER=firefox behave Features/ -f allure_behave.formatter:AllureFormatter -o allure-results/firefox
-
-# After both finish — merge and open
 allure generate allure-results/chromium allure-results/firefox -o allure-report --clean
 allure open allure-report
