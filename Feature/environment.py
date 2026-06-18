@@ -24,6 +24,7 @@ def after_scenario(context, scenario):
                 # Attach screenshot to Allure report
                 with open(filename, "rb") as image_file:
                     allure.attach(image_file.read(), name="screenshot", attachment_type=allure.attachment_type.PNG)
+                driver.quit()
             except Exception as e:
                 print(f"[AFTER_SCENARIO][ERROR] Failed to save screenshot: {e}", flush=True)
         else:
