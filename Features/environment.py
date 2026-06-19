@@ -5,7 +5,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 import os
 import allure
-
+import logging
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -15,6 +15,7 @@ HUB_URL = os.getenv("SELENIUM_HUB_URL", "http://localhost:4444/wd/hub")
 BROWSER = os.getenv("BROWSER", "chromium").lower()
 
 def before_feature(context, feature):
+    feature.name = f"[{BROWSER.upper()}] {feature.name}"
     os.makedirs("screenshots", exist_ok=True)
 
     if BROWSER in ("chromium", "chrome"):
