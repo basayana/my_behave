@@ -10,10 +10,11 @@ import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 HUB_URL = os.getenv("SELENIUM_HUB_URL", "http://localhost:4444/wd/hub")
-BROWSER = os.getenv("BROWSER", "chromium").lower()
-
+BROWSER = os.getenv("BROWSER").lower()
+RUN_LOCAL = os.getenv("RUN_LOCAL").lower()
 def before_feature(context, feature):
     feature.name = f"[{BROWSER.upper()}] {feature.name}"
     os.makedirs("screenshots", exist_ok=True)
@@ -32,6 +33,9 @@ def before_feature(context, feature):
             command_executor=HUB_URL,
             options=options
         )
+    elif RUN_LOCAL == "true":
+        service = Service(ChromeDriverManager().install())
+        context.driver = webdriver.Chrome(service=service, options=ChromeOptions())
 
     context.driver.implicitly_wait(10)
     context.driver.get("https://testautomationpractice.blogspot.com/")
